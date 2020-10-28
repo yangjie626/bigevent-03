@@ -25,17 +25,44 @@ $(function() {
         e.preventDefault()
         $.ajax({
             method: 'POST',
-            url: 'http://ajax.frontend.itheima.net/api/reguser',
+            url: '/api/reguser',
             data: {
                 username: $('.reg-box input[name=username]').val(),
                 password: $('.reg-box input[name=password]').val()
             },
             success: function(res) {
                 if (res.status !== 0) {
-                    return alert(res.message)
+                    return layui.layer.msg(res.message)
                 }
-                alert(res.message)
+                $('#link-login').click()
+                $('#form-reg')[0].reset()
             }
         })
     })
+
+    // 登录区域
+    $('#form-login').on('submit', function(e) {
+        e.preventDefault()
+        $.ajax({
+            method: 'POST',
+            url: '/api/login',
+            data: {
+                username: $('.login-box input[name=username]').val(),
+                password: $('.login-box input[name=password]').val()
+            },
+            success: function(res) {
+                console.log(res);
+                if (res.status !== 0) {
+                    return layui.layer.msg(res.message)
+                }
+                layui.layer.msg(res.message)
+                localStorage.setItem('token', res.token)
+                location.href = '/index.html'
+            }
+
+        })
+    })
+
+
+
 })
