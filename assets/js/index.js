@@ -27,7 +27,7 @@ function renderAvatar(user) {
     $('#welcome').html('hello' + name)
     var text = name[0].toUpperCase()
     if (user.user_pic !== null) {
-        $('.layui-nav-img').show().attr('src', 'user.user_pic')
+        $('.layui-nav-img').show().attr('src', user.user_pic)
         $('.text-img').hide()
     } else {
         $('.layui-nav-img').hide()
